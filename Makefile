@@ -1,6 +1,6 @@
 all: project
 
-project: main.o tile.o
+project: tile.o game.o main.o
 	g++ -o $@ $^ -g -std=c++11 -Wall -lsfml-graphics -lsfml-window -lsfml-system
 
 %.o: %.cc

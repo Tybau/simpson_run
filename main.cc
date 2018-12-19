@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "tile.hh"
+#include "game.hh"
 
 int main()
 {
@@ -8,8 +9,7 @@ int main()
     /*sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);*/
 
-	Position pos(50, 100);
-	Tile tile(pos, "images/wall.jpg");
+	Game game = Game();
 
     while (window.isOpen())
     {
@@ -20,9 +20,11 @@ int main()
                 window.close();
         }
 
+		game.update();
+
         window.clear();
         //window.draw(shape);
-		tile.draw(window);
+		game.draw(window);
         window.display();
     }
 

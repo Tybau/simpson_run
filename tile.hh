@@ -13,7 +13,7 @@ protected:
 	Position pos;
 	sf::Texture tex;
 public:
-	Tile(Position &pos, const std::string &texPath);
+	Tile(const Position &pos, const std::string &texPath);
 	//virtual void colision(Personnage p);
 	//virtual void draw(sf::RenderWindow &win) = 0;
 	void draw(sf::RenderWindow &win);

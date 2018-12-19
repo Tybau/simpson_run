@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Tile::Tile(Position &pos, const std::string &texPath)
+Tile::Tile(const Position &pos, const std::string &texPath)
 	: pos(pos)
 {
 	if (!tex.loadFromFile(texPath))
