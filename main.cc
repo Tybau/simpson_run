@@ -13,22 +13,32 @@ int main()
 	Game game = Game();
 	State state = State();
 
+	sf::Clock clock;
+
     while (window.isOpen())
     {
-        sf::Event event;
-        while(window.pollEvent(event))
+		sf::Time elapsed = clock.getElapsedTime();
+
+		// Pour ne pas refresh trop vite (60Hz)
+		if(elapsed.asMilliseconds() > 1000 / 60)
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-			state.update(event);
+			clock.restart();
+
+			sf::Event event;
+	        while(window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					window.close();
+				state.update(event);
+			}
+
+			game.update(state);
+
+	        window.clear();
+	        //window.draw(shape);
+			game.draw(window);
+	        window.display();
 		}
-
-		game.update(state);
-
-        window.clear();
-        //window.draw(shape);
-		game.draw(window);
-        window.display();
     }
 
     return 0;
