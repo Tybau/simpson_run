@@ -38,8 +38,7 @@ void Personnage::update(State &state)
 	if(velocity.y < 0) velocity.y++;
 
 	// Appliquer le mouvement
-	pos.setX(pos.getX() + velocity.x / INERTIE);
-	pos.setY(pos.getY() + velocity.y / INERTIE);
+	pos += velocity / INERTIE;
 }
 
 void Personnage::draw(sf::RenderWindow &win)
