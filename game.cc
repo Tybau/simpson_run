@@ -1,6 +1,7 @@
 #include "game.hh"
 
 Game::Game()
+	: player(Position(500, 200), "images/perso.jpg")
 {
 	for(int i = 0; i < 10; i++)
 	{
@@ -11,8 +12,9 @@ Game::Game()
 	}
 }
 
-void Game::update()
+void Game::update(State &state)
 {
+	player.update(state);
 }
 
 void Game::draw(sf::RenderWindow &win)
@@ -21,4 +23,5 @@ void Game::draw(sf::RenderWindow &win)
 	{
 		tile.draw(win);
 	}
+	player.draw(win);
 }

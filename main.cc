@@ -2,6 +2,7 @@
 
 #include "tile.hh"
 #include "game.hh"
+#include "state.hh"
 
 int main()
 {
@@ -10,17 +11,19 @@ int main()
     shape.setFillColor(sf::Color::Green);*/
 
 	Game game = Game();
+	State state = State();
 
     while (window.isOpen())
     {
         sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        while(window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+				window.close();
+			state.update(event);
+		}
 
-		game.update();
+		game.update(state);
 
         window.clear();
         //window.draw(shape);

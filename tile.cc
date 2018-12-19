@@ -6,9 +6,7 @@ Tile::Tile(const Position &pos, const std::string &texPath)
 	: pos(pos)
 {
 	if (!tex.loadFromFile(texPath))
-	{
-	    std::cerr << "Erreur chargement" << std::endl;
-	}
+	    std::cerr << "Erreur de chargement de la texture!" << std::endl;
 }
 
 void Tile::draw(sf::RenderWindow &win)
