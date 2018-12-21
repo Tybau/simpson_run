@@ -13,7 +13,7 @@ Personnage::Personnage(const Position &pos, const std::string &texPath)
 	    std::cerr << "Erreur de chargement de la texture!" << std::endl;
 }
 
-void Personnage::update(State &state)
+void Personnage::update(State &state, std::vector<Tile> &tiles)
 {
 	// Augmenter la vitesse en fonction du clavier
 	if (state.KEY_Z)
@@ -38,7 +38,18 @@ void Personnage::update(State &state)
 	if(velocity.y < 0) velocity.y++;
 
 	// Appliquer le mouvement
+	Position oldPos = Position(pos.getX(), pos.getY());
 	pos += velocity / INERTIE;
+
+	for(auto& tile : tiles)
+	{
+		if(tile.collision(pos))
+		{
+			pos.set(oldPos.getX(), oldPos.getY());
+			velocity.x = 0;
+			velocity.y = 0;
+		}
+	}
 }
 
 void Personnage::draw(sf::RenderWindow &win)

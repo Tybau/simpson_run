@@ -14,7 +14,7 @@ Game::Game()
 
 void Game::update(State &state)
 {
-	player.update(state);
+	player.update(state, tiles);
 }
 
 void Game::draw(sf::RenderWindow &win)

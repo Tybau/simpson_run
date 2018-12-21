@@ -17,6 +17,8 @@ public:
 	void setX(float x) { this->x = x; };
 	int getY() const { return y; };
 	void setY(float y) { this->y = y; };
+
+	sf::Vector2f getVector();
 };
 
 // Pour l'inertie

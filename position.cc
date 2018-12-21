@@ -25,6 +25,12 @@ Position &Position::operator+=(const sf::Vector2f &v)
 	return *this;
 }
 
+sf::Vector2f Position::getVector()
+{
+	return sf::Vector2f(x, y);
+}
+
+
 sf::Vector2f operator/(const sf::Vector2f &v, const float d)
 {
 	sf::Vector2f res;
