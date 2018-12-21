@@ -7,6 +7,8 @@
 class Donut : public Object
 {
 private:
+	sf::SoundBuffer buffer;
+	sf::Sound sound;
 	sf::Texture crocTex;
 public:
 	Donut(const Position &pos);
