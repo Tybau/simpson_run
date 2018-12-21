@@ -1,10 +1,17 @@
+LIBS = -L ./SFML-2.5.1/lib
+INCLUDES = -I ./SFML-2.5.1/include
+
+FLAGS = -std=c++11 -Wall
+CPP_FLAGS = ${FLAGS} ${INCLUDES}
+LD_FLAGS = ${FLAGS} ${LIBS} -lsfml-graphics -lsfml-window -lsfml-system
+
 all: project
 
 project: main.o game.o position.o tile.o personnage.o
-	g++ -o $@ $^ -g -std=c++11 -Wall -lsfml-graphics -lsfml-window -lsfml-system
+	g++ -o $@ $^ -g ${LD_FLAGS}
 
 %.o: %.cc
-	g++ -c $^ -g -std=c++11 -Wall
+	g++ -c $^ -g ${CPP_FLAGS}
 
 clean:
 	rm -f *.o project
