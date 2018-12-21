@@ -14,6 +14,7 @@ private:
 	Personnage player;
 public:
 	Game();
+	virtual ~Game();
 	void update(State &state);
 	void draw(sf::RenderWindow &win);
 };

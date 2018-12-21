@@ -2,6 +2,9 @@
 
 #include <iostream>
 
+#include "wall.hh"
+#include "object.hh"
+
 #define MAX_SPEED 8
 #define INERTIE 2
 #define REAL_SPEED (MAX_SPEED * INERTIE)
@@ -46,9 +49,17 @@ void Personnage::update(State &state, std::vector<Tile *> &tiles)
 	{
 		if(tile->collision(pos))
 		{
-			pos.set(oldPos.getX(), oldPos.getY());
-			velocity.x = 0;
-			velocity.y = 0;
+			if(dynamic_cast<Wall *>(tile))
+			{
+				pos.set(oldPos.getX(), oldPos.getY());
+				velocity.x = 0;
+				velocity.y = 0;
+			}
+			if(dynamic_cast<Object *>(tile))
+			{
+				Object *o = static_cast<Object *>(tile);
+				o->interact(*this);
+			}
 		}
 	}
 }

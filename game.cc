@@ -1,6 +1,7 @@
 #include "game.hh"
 
 #include "wall.hh"
+#include "donut.hh"
 
 Game::Game()
 	: player(Position(500, 200), "images/perso.png")
@@ -15,6 +16,15 @@ Game::Game()
 	tiles.push_back(new Wall(Position(8 * TILE_SIZE, 5 * TILE_SIZE)));
 	tiles.push_back(new Wall(Position(9 * TILE_SIZE, 6 * TILE_SIZE)));
 	tiles.push_back(new Wall(Position(10 * TILE_SIZE, 6 * TILE_SIZE)));
+
+	tiles.push_back(new Donut(Position(10 * TILE_SIZE, 5 * TILE_SIZE)));
+	tiles.push_back(new Donut(Position(2 * TILE_SIZE, 4 * TILE_SIZE)));
+}
+
+Game::~Game()
+{
+	for(auto &tile : tiles)
+		delete tile;
 }
 
 void Game::update(State &state)

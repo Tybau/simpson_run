@@ -14,6 +14,8 @@ private:
 	sf::Texture tex;
 	Position pos;
 	sf::Vector2f velocity;
+
+	int score;
 public:
 	Personnage(const Position &pos, const std::string &texPath);
 	void move(sf::Event &event);
@@ -21,4 +23,6 @@ public:
 	void draw(sf::RenderWindow &win);
 
 	Position getPosition() const { return pos; };
+	int getScore() const { return score; };
+	void addScore(const int &s) { score += s; };
 };
