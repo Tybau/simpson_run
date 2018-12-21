@@ -2,12 +2,10 @@
 
 #include "object.hh"
 
-class Donut : public Object
+class Spicy : public Object
 {
-private:
-	sf::Texture crocTex;
 public:
-	Donut(const Position &pos);
+	Spicy(const Position &pos);
 	virtual void interact(Personnage &p);
 	virtual void draw(sf::RenderWindow &win);
 };

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Donut::Donut(const Position &pos):Object(pos, "images/donut.png"), state(true)
+Donut::Donut(const Position &pos):Object(pos, "images/donut.png")
 {
 	if (!crocTex.loadFromFile("images/donut_croc.png"))
 	    std::cerr << "Erreur de chargement de la texture!" << std::endl;
@@ -10,18 +10,17 @@ Donut::Donut(const Position &pos):Object(pos, "images/donut.png"), state(true)
 
 void Donut::interact(Personnage &p)
 {
-	if(state)
+	if(this->state)
 	{
 		p.addScore(1);
-		state = false;
+		this->state = false;
 	}
-	std::cout << "MIAM : " << p.getScore() << std::endl;
 }
 
 void Donut::draw(sf::RenderWindow &win)
 {
 	sf::Sprite sprite;
-	if(state)
+	if(this->state)
 		sprite.setTexture(tex);
 	else
 		sprite.setTexture(crocTex);
