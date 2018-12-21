@@ -15,6 +15,5 @@ protected:
 public:
 	Tile(const Position &pos, const std::string &texPath);
 	bool collision(Position &p);
-	//virtual void draw(sf::RenderWindow &win) = 0;
-	void draw(sf::RenderWindow &win);
+	virtual void draw(sf::RenderWindow &win) = 0;
 };

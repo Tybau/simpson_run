@@ -10,7 +10,7 @@
 class Game
 {
 private:
-	std::vector<Tile> tiles;
+	std::vector<Tile *> tiles;
 	Personnage player;
 public:
 	Game();
