@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Audio.hpp>
+
 #include "object.hh"
 
 class Donut : public Object

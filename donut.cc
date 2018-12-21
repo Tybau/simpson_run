@@ -1,5 +1,6 @@
 #include "donut.hh"
 
+#include <SFML/Audio.hpp>
 #include <iostream>
 
 Donut::Donut(const Position &pos):Object(pos, "images/donut.png")
@@ -14,6 +15,15 @@ void Donut::interact(Personnage &p)
 	{
 		p.addScore(1);
 		this->state = false;
+
+		sf::SoundBuffer buffer;
+
+		if (!buffer.loadFromFile("sounds/miam.wav"))
+		    std::cerr << "Erreur de chargement du son!" << std::endl;
+
+		sf::Sound sound;
+		sound.setBuffer(buffer);
+		sound.play();
 	}
 }
 

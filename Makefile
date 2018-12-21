@@ -3,7 +3,7 @@ INCLUDES = -I ./SFML-2.5.1/include
 
 FLAGS = -std=c++11 -Wall
 CPP_FLAGS = ${FLAGS} ${INCLUDES}
-LD_FLAGS = ${FLAGS} ${LIBS} -lsfml-graphics -lsfml-window -lsfml-system
+LD_FLAGS = ${FLAGS} ${LIBS} -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 all: project
 

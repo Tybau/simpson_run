@@ -10,7 +10,7 @@
 #define REAL_SPEED (MAX_SPEED * INERTIE)
 
 Personnage::Personnage(const Position &pos, const std::string &texPath)
-	: pos(pos)
+	: pos(pos), score(0)
 {
 	if (!tex.loadFromFile(texPath))
 	    std::cerr << "Erreur de chargement de la texture!" << std::endl;

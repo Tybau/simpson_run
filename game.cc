@@ -54,7 +54,7 @@ void Game::draw(sf::RenderWindow &win)
 	sf::Text text("Score : " + std::to_string(player.getScore()), font);
 	text.setCharacterSize(30);
 	text.setStyle(sf::Text::Bold);
-	text.setColor(sf::Color(255, 255, 0));
+	text.setFillColor(sf::Color(255, 255, 0));
 	text.setPosition(10, 560);
 
 	win.draw(text);
