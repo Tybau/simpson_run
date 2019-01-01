@@ -7,8 +7,9 @@ Les fichiers contenues sont :
 -   personnage.hh,personnage.cc
 -   spicy.cc,spicy.hh, object.hh
 -   state.hh,position.hh,tile.cc,tile.hh
--   wall.cc , wall.hh, Makefile
--   main.cc,Makefile
+-   wall.cc , wall.hh
+-   main.cc
+-   Makefile
 
 
 ---   Explication concernant le jeu -----
