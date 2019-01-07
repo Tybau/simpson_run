@@ -17,4 +17,6 @@ public:
 	virtual ~Tile(){};
 	bool collision(Position &p);
 	virtual void draw(sf::RenderWindow &win) = 0;
+
+	Position getPosition() const { return pos; };
 };

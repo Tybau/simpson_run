@@ -15,6 +15,8 @@ private:
 	Position pos;
 	sf::Vector2f velocity;
 
+	bool grounded;
+
 	int score;
 public:
 	Personnage(const Position &pos, const std::string &texPath);
