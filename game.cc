@@ -7,7 +7,18 @@
 Game::Game()
 	: player(Position(500, 200), "images/perso.png")
 {
+	setMap();
+	screen = 0;
+}
 
+Game::~Game()
+{
+	for(auto &tile : tiles)
+		delete tile;
+}
+
+void Game::setMap()
+{
 	tiles.push_back(new Wall(Position(2 * TILE_SIZE, 5 * TILE_SIZE)));
 	tiles.push_back(new Wall(Position(3 * TILE_SIZE, 5 * TILE_SIZE)));
 	tiles.push_back(new Wall(Position(4 * TILE_SIZE, 5 * TILE_SIZE)));
@@ -25,37 +36,88 @@ Game::Game()
 	tiles.push_back(new Spicy(Position(9 * TILE_SIZE, 5 * TILE_SIZE)));
 }
 
-Game::~Game()
-{
-	for(auto &tile : tiles)
-		delete tile;
-}
-
 void Game::update(State &state)
 {
-	player.update(state, tiles);
+	if(screen == 0)
+	{
+		int time = MAX_TIME - (int)timer.getElapsedTime().asSeconds();
+		if(time <= 0)
+			screen = 1;
+		player.update(state, tiles);
+	}
+	if(screen == 1)
+	{
+		if(state.KEY_SPACE)
+		{
+			// Reset le jeu
+			screen = 0;
+			player.resetScore();
+			timer.restart();
+
+			// Reset la Map
+			for(auto &tile : tiles)
+				delete tile;
+			tiles.clear();
+			setMap();
+		}
+	}
 }
 
 void Game::draw(sf::RenderWindow &win)
 {
-	// Affichage des tuiles
-	for(auto &tile : tiles)
+	if(screen == 0)
 	{
-		tile->draw(win);
+		// Affichage des tuiles
+		for(auto &tile : tiles)
+		{
+			tile->draw(win);
+		}
+
+		// Affichage du joueur
+		player.draw(win);
+
+		// Affichage du texte
+		sf::Font font;
+		font.loadFromFile("fonts/simpson.ttf");
+
+		// Score
+		sf::Text text("Score : " + std::to_string(player.getScore()), font);
+		text.setCharacterSize(30);
+		text.setStyle(sf::Text::Bold);
+		text.setFillColor(sf::Color(255, 255, 0));
+		text.setPosition(10, 560);
+
+		// timer
+		int time = MAX_TIME - (int)timer.getElapsedTime().asSeconds();
+		sf::Text text2(std::to_string(time) + "s", font);
+		text2.setCharacterSize(30);
+		text2.setStyle(sf::Text::Bold);
+		text2.setFillColor(sf::Color(255, 255, 0));
+		text2.setPosition(700, 560);
+
+		win.draw(text);
+		win.draw(text2);
 	}
+	else if(screen == 1)
+	{
+		sf::Font font;
+		font.loadFromFile("fonts/simpson.ttf");
 
-	// Affichage du joueur
-	player.draw(win);
+		// Message
+		sf::Text text("Appuyez sur espace pour rejouer !", font);
+		text.setCharacterSize(40);
+		text.setStyle(sf::Text::Bold);
+		text.setFillColor(sf::Color(255, 255, 0));
+		text.setPosition(10, 10);
 
-	// Affichage du texte
-	sf::Font font;
-	font.loadFromFile("fonts/simpson.ttf");
+		// Score
+		sf::Text text2("Score : " + std::to_string(player.getScore()), font);
+		text2.setCharacterSize(30);
+		text2.setStyle(sf::Text::Bold);
+		text2.setFillColor(sf::Color(255, 255, 0));
+		text2.setPosition(10, 560);
 
-	sf::Text text("Score : " + std::to_string(player.getScore()), font);
-	text.setCharacterSize(30);
-	text.setStyle(sf::Text::Bold);
-	text.setFillColor(sf::Color(255, 255, 0));
-	text.setPosition(10, 560);
-
-	win.draw(text);
+		win.draw(text);
+		win.draw(text2);
+	}
 }

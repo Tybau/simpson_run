@@ -27,4 +27,5 @@ public:
 	Position getPosition() const { return pos; };
 	int getScore() const { return score; };
 	void addScore(const int &s) { score += s; };
+	void resetScore() { score = 0; };
 };
