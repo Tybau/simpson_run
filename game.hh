@@ -4,7 +4,8 @@
 #include <vector>
 
 #include "tile.hh"
-#include "personnage.hh"
+#include "player.hh"
+#include "ghost.hh"
 #include "state.hh"
 
 #define MAX_TIME 10
@@ -13,7 +14,8 @@ class Game
 {
 private:
 	std::vector<Tile *> tiles;
-	Personnage player;
+	Player player;
+	std::vector<Ghost> ghosts;
 
 	int screen;
 	sf::Clock timer;

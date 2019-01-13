@@ -7,7 +7,7 @@ LD_FLAGS = ${FLAGS} ${LIBS} -lsfml-graphics -lsfml-window -lsfml-system -lsfml-a
 
 all: project
 
-project: main.o game.o position.o tile.o personnage.o wall.o donut.o spicy.o
+project: main.o game.o position.o tile.o player.o wall.o donut.o spicy.o ghost.o
 	g++ -o $@ $^ -g ${LD_FLAGS}
 
 %.o: %.cc

@@ -3,6 +3,8 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 
+#include "player.hh"
+
 Donut::Donut(const Position &pos):Object(pos, "images/donut.png")
 {
 	if (!crocTex.loadFromFile("images/donut_croc.png"))
@@ -16,9 +18,13 @@ void Donut::interact(Personnage &p)
 {
 	if(this->state)
 	{
-		p.addScore(1);
-		this->state = false;
-		sound.play();
+		Player *player = dynamic_cast<Player *>(&p);
+		if(player != nullptr)
+		{
+			player->addScore(1);
+			this->state = false;
+			sound.play();
+		}
 	}
 }
 

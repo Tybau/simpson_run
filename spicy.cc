@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "player.hh"
+
 Spicy::Spicy(const Position &pos):Object(pos, "images/spicy.png")
 {
 }
@@ -10,8 +12,12 @@ void Spicy::interact(Personnage &p)
 {
 	if(this->state)
 	{
-		p.addScore(-1);
-		this->state = false;
+		Player *player = dynamic_cast<Player *>(&p);
+		if(player != nullptr)
+		{
+			player->addScore(-1);
+			this->state = false;
+		}
 	}
 }
 

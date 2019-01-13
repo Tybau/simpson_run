@@ -8,6 +8,12 @@ Game::Game()
 	: player(Position(500, 200), "images/perso.png")
 {
 	setMap();
+
+	ghosts.push_back(Ghost(Position(1 * TILE_SIZE, 1 * TILE_SIZE), 0));
+	ghosts.push_back(Ghost(Position(3 * TILE_SIZE, 3 * TILE_SIZE), 1));
+	ghosts.push_back(Ghost(Position(5 * TILE_SIZE, 4 * TILE_SIZE), 2));
+	ghosts.push_back(Ghost(Position(8 * TILE_SIZE, 8 * TILE_SIZE), 3));
+
 	screen = 0;
 }
 
@@ -44,6 +50,8 @@ void Game::update(State &state)
 		if(time <= 0)
 			screen = 1;
 		player.update(state, tiles);
+		for(auto &g : ghosts)
+			g.update(state, tiles);
 	}
 	if(screen == 1)
 	{
@@ -75,6 +83,10 @@ void Game::draw(sf::RenderWindow &win)
 
 		// Affichage du joueur
 		player.draw(win);
+
+		// Affichage des fantomes
+		for(auto &g : ghosts)
+			g.draw(win);
 
 		// Affichage du texte
 		sf::Font font;

@@ -1,4 +1,4 @@
-#include "personnage.hh"
+#include "player.hh"
 
 #include <iostream>
 
@@ -10,15 +10,7 @@
 #define REAL_SPEED (MAX_SPEED * INERTIE)
 #define JUMP 0.45
 
-Personnage::Personnage(const Position &pos, const std::string &texPath)
-	: pos(pos), score(0)
-{
-	if (!tex.loadFromFile(texPath))
-	    std::cerr << "Erreur de chargement de la texture!" << std::endl;
-	grounded = false;
-}
-
-void Personnage::update(const State &state, const std::vector<Tile *> &tiles)
+void Player::update(const State &state, const std::vector<Tile *> &tiles)
 {
 	// Augmenter la vitesse en fonction du clavier
 	if (state.KEY_Q) // DROITE
@@ -51,7 +43,7 @@ void Personnage::update(const State &state, const std::vector<Tile *> &tiles)
 	applyCollisions(tiles, oldPos);
 }
 
-void Personnage::applyCollisions(const std::vector<Tile *> &tiles, const Position oldPos)
+void Player::applyCollisions(const std::vector<Tile *> &tiles, const Position oldPos)
 {
 	// Reset grounded
 	grounded = false;
@@ -81,7 +73,7 @@ void Personnage::applyCollisions(const std::vector<Tile *> &tiles, const Positio
 	}
 }
 
-void Personnage::draw(sf::RenderWindow &win)
+void Player::draw(sf::RenderWindow &win)
 {
 	sf::Sprite sprite;
 	sprite.setTexture(tex);
