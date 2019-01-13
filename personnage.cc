@@ -18,7 +18,7 @@ Personnage::Personnage(const Position &pos, const std::string &texPath)
 	grounded = false;
 }
 
-void Personnage::update(State &state, std::vector<Tile *> &tiles)
+void Personnage::update(const State &state, const std::vector<Tile *> &tiles)
 {
 	// Augmenter la vitesse en fonction du clavier
 	if (state.KEY_Q) // DROITE
@@ -47,9 +47,15 @@ void Personnage::update(State &state, std::vector<Tile *> &tiles)
 	Position oldPos = Position(pos.getX(), pos.getY());
 	pos += velocity / INERTIE;
 
+	// Gérer les collisions
+	applyCollisions(tiles, oldPos);
+}
+
+void Personnage::applyCollisions(const std::vector<Tile *> &tiles, const Position oldPos)
+{
+	// Reset grounded
 	grounded = false;
 
-	// Gérer les collisions
 	for(auto& tile : tiles)
 	{
 		// Verifier si il y a du sol
