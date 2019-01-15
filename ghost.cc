@@ -40,7 +40,7 @@ void Ghost::update(const State &state, const std::vector<Tile *> &tiles)
 	pos += velocity;
 
 	// Gérer les collisions
-	applyCollisions(tiles, oldPos);
+	//applyCollisions(tiles, oldPos);  // Traverser les mures ?
 }
 
 void Ghost::applyCollisions(const std::vector<Tile *> &tiles, const Position oldPos)

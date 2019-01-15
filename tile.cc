@@ -20,5 +20,5 @@ bool Tile::collision(Position &p)
 	float tX = pos.getX();
 	float tY = pos.getY();
 
-	return (pX + PERSO_WIDTH > tX && pX < tX + TILE_SIZE && pY + PERSO_HEIGHT > tY && pY < tY + TILE_SIZE);
+	return (pX + PERSO_WIDTH > tX && pX < tX + TILE_SIZE && pY + PERSO_HEIGHT - 5 > tY && pY + 5 < tY + TILE_SIZE);
 }

@@ -29,26 +29,21 @@ Game::~Game()
 
 void Game::setMap()
 {
-	int map[13][10];
+	int map[13][8];
 
 	std::srand(std::time(nullptr));
 
+	// Genere les murs
 	for (int i = -1; i < 13; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 8; j++)
 		{
-			if(j == 9 || i == -1 || i == 12) // tour plein
-			{
-				tiles.push_back(new Wall(Position(i * TILE_SIZE, j * TILE_SIZE)));
-				continue;
-			}
 			if(j == 0) continue;  // premiere ligne vide
 
 			int p = 20;
 			map[i][j] = 0;
 
 			if(j > 0 && map[i][j - 1] == 1) p -= 15;
-			if(j > 1 && map[i][j - 2] == 1) p -= 10;
 			if(i > 0 && map[i - 1][j] == 1) p += 30;
 			if(i > 0 && j > 0 && map[i - 1][j - 1] == 1) p += 15;
 			if(i > 0 && j < 13 && map[i - 1][j + 1] == 1) p += 15;
@@ -61,9 +56,10 @@ void Game::setMap()
 		}
 	}
 
+	// Genere les bonus
 	for (int i = 0; i < 13; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 8; j++)
 		{
 			int p = 5;
 
@@ -71,33 +67,12 @@ void Game::setMap()
 			{
 				if(i < 13 && map[i][j + 1] == 1) p += 15;
 				if(std::rand() % 100 < p)
-				{
 					tiles.push_back(new Donut(Position(i * TILE_SIZE, j * TILE_SIZE)));
-				}
-
-				if(std::rand() % 100 < p * 0.66)
-				{
+				else if(std::rand() % 100 < p / 2)
 					tiles.push_back(new Spicy(Position(i * TILE_SIZE, j * TILE_SIZE)));
-				}
 			}
 		}
 	}
-
-	/*tiles.push_back(new Wall(Position(2 * TILE_SIZE, 5 * TILE_SIZE)));
-	tiles.push_back(new Wall(Position(3 * TILE_SIZE, 5 * TILE_SIZE)));
-	tiles.push_back(new Wall(Position(4 * TILE_SIZE, 5 * TILE_SIZE)));
-	tiles.push_back(new Wall(Position(5 * TILE_SIZE, 5 * TILE_SIZE)));
-
-	tiles.push_back(new Wall(Position(7 * TILE_SIZE, 5 * TILE_SIZE)));
-	tiles.push_back(new Wall(Position(8 * TILE_SIZE, 5 * TILE_SIZE)));
-	tiles.push_back(new Wall(Position(9 * TILE_SIZE, 6 * TILE_SIZE)));
-	tiles.push_back(new Wall(Position(10 * TILE_SIZE, 6 * TILE_SIZE)));
-	tiles.push_back(new Wall(Position(11 * TILE_SIZE, 6 * TILE_SIZE)));*/
-
-	/*tiles.push_back(new Donut(Position(11 * TILE_SIZE, 5 * TILE_SIZE)));
-	tiles.push_back(new Donut(Position(2 * TILE_SIZE, 4 * TILE_SIZE)));
-
-	//tiles.push_back(new Spicy(Position(9 * TILE_SIZE, 5 * TILE_SIZE)));*/
 }
 
 void Game::update(State &state)
