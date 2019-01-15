@@ -31,6 +31,7 @@ public:
 	virtual void draw(sf::RenderWindow &win) = 0;
 
 	Position getPosition() const { return pos; };
+	void setPosition(const Position &pos) { this->pos = pos; };
 protected:
 	virtual void applyCollisions(const std::vector<Tile *> &tiles, const Position oldPos) = 0;
 };

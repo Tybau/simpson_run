@@ -4,8 +4,12 @@
 #include "donut.hh"
 #include "spicy.hh"
 
+#include <cstdlib>
+#include <iostream>
+#include <ctime>
+
 Game::Game()
-	: player(Position(500, 200), "images/perso.png")
+	: player(Position(0, 0), "images/perso.png")
 {
 	setMap();
 
@@ -25,7 +29,61 @@ Game::~Game()
 
 void Game::setMap()
 {
-	tiles.push_back(new Wall(Position(2 * TILE_SIZE, 5 * TILE_SIZE)));
+	int map[13][10];
+
+	std::srand(std::time(nullptr));
+
+	for (int i = -1; i < 13; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			if(j == 9 || i == -1 || i == 12) // tour plein
+			{
+				tiles.push_back(new Wall(Position(i * TILE_SIZE, j * TILE_SIZE)));
+				continue;
+			}
+			if(j == 0) continue;  // premiere ligne vide
+
+			int p = 20;
+			map[i][j] = 0;
+
+			if(j > 0 && map[i][j - 1] == 1) p -= 15;
+			if(j > 1 && map[i][j - 2] == 1) p -= 10;
+			if(i > 0 && map[i - 1][j] == 1) p += 30;
+			if(i > 0 && j > 0 && map[i - 1][j - 1] == 1) p += 15;
+			if(i > 0 && j < 13 && map[i - 1][j + 1] == 1) p += 15;
+
+			if(std::rand() % 100 < p)
+			{
+				tiles.push_back(new Wall(Position(i * TILE_SIZE, j * TILE_SIZE)));
+				map[i][j] = 1;
+			}
+		}
+	}
+
+	for (int i = 0; i < 13; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			int p = 5;
+
+			if(!map[i][j])
+			{
+				if(i < 13 && map[i][j + 1] == 1) p += 15;
+				if(std::rand() % 100 < p)
+				{
+					tiles.push_back(new Donut(Position(i * TILE_SIZE, j * TILE_SIZE)));
+				}
+
+				if(std::rand() % 100 < p * 0.66)
+				{
+					tiles.push_back(new Spicy(Position(i * TILE_SIZE, j * TILE_SIZE)));
+				}
+			}
+		}
+	}
+
+	/*tiles.push_back(new Wall(Position(2 * TILE_SIZE, 5 * TILE_SIZE)));
 	tiles.push_back(new Wall(Position(3 * TILE_SIZE, 5 * TILE_SIZE)));
 	tiles.push_back(new Wall(Position(4 * TILE_SIZE, 5 * TILE_SIZE)));
 	tiles.push_back(new Wall(Position(5 * TILE_SIZE, 5 * TILE_SIZE)));
@@ -34,12 +92,12 @@ void Game::setMap()
 	tiles.push_back(new Wall(Position(8 * TILE_SIZE, 5 * TILE_SIZE)));
 	tiles.push_back(new Wall(Position(9 * TILE_SIZE, 6 * TILE_SIZE)));
 	tiles.push_back(new Wall(Position(10 * TILE_SIZE, 6 * TILE_SIZE)));
-	tiles.push_back(new Wall(Position(11 * TILE_SIZE, 6 * TILE_SIZE)));
+	tiles.push_back(new Wall(Position(11 * TILE_SIZE, 6 * TILE_SIZE)));*/
 
-	tiles.push_back(new Donut(Position(11 * TILE_SIZE, 5 * TILE_SIZE)));
+	/*tiles.push_back(new Donut(Position(11 * TILE_SIZE, 5 * TILE_SIZE)));
 	tiles.push_back(new Donut(Position(2 * TILE_SIZE, 4 * TILE_SIZE)));
 
-	tiles.push_back(new Spicy(Position(9 * TILE_SIZE, 5 * TILE_SIZE)));
+	//tiles.push_back(new Spicy(Position(9 * TILE_SIZE, 5 * TILE_SIZE)));*/
 }
 
 void Game::update(State &state)
@@ -60,6 +118,7 @@ void Game::update(State &state)
 			// Reset le jeu
 			screen = 0;
 			player.resetScore();
+			player.setPosition(Position(0, 0));
 			timer.restart();
 
 			// Reset la Map

@@ -8,7 +8,7 @@
 #define MAX_SPEED 8
 #define INERTIE 2
 #define REAL_SPEED (MAX_SPEED * INERTIE)
-#define JUMP 0.45
+#define JUMP 0.75
 
 void Player::update(const State &state, const std::vector<Tile *> &tiles)
 {
