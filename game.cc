@@ -13,10 +13,10 @@ Game::Game()
 {
 	setMap();
 
-	ghosts.push_back(Ghost(Position(1 * TILE_SIZE, 1 * TILE_SIZE), 0));
+	/*ghosts.push_back(Ghost(Position(1 * TILE_SIZE, 1 * TILE_SIZE), 0));
 	ghosts.push_back(Ghost(Position(3 * TILE_SIZE, 3 * TILE_SIZE), 1));
 	ghosts.push_back(Ghost(Position(5 * TILE_SIZE, 4 * TILE_SIZE), 2));
-	ghosts.push_back(Ghost(Position(8 * TILE_SIZE, 8 * TILE_SIZE), 3));
+	ghosts.push_back(Ghost(Position(8 * TILE_SIZE, 8 * TILE_SIZE), 3));*/
 
 	screen = 0;
 }
@@ -70,6 +70,8 @@ void Game::setMap()
 					tiles.push_back(new Donut(Position(i * TILE_SIZE, j * TILE_SIZE)));
 				else if(std::rand() % 100 < p / 2)
 					tiles.push_back(new Spicy(Position(i * TILE_SIZE, j * TILE_SIZE)));
+				else if(std::rand() % 100 < p)
+					ghosts.push_back(Ghost(Position(i * TILE_SIZE, j * TILE_SIZE), (i+j)%4));
 			}
 		}
 	}
@@ -84,7 +86,10 @@ void Game::update(State &state)
 			screen = 1;
 		player.update(state, tiles);
 		for(auto &g : ghosts)
+		{
 			g.update(state, tiles);
+			g.collide(player);
+		}
 	}
 	if(screen == 1)
 	{
@@ -100,6 +105,7 @@ void Game::update(State &state)
 			for(auto &tile : tiles)
 				delete tile;
 			tiles.clear();
+			ghosts.clear();
 			setMap();
 		}
 	}

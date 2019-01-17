@@ -19,6 +19,8 @@
 
 void Ghost::update(const State &state, const std::vector<Tile *> &tiles)
 {
+	if(!active) return;
+
 	// Modifier les deplacements
 	if (dir == DROITE)
         velocity.x = 2;
@@ -40,7 +42,7 @@ void Ghost::update(const State &state, const std::vector<Tile *> &tiles)
 	pos += velocity;
 
 	// Gérer les collisions
-	//applyCollisions(tiles, oldPos);  // Traverser les mures ?
+	applyCollisions(tiles, oldPos);  // Traverser les mures ?
 }
 
 void Ghost::applyCollisions(const std::vector<Tile *> &tiles, const Position oldPos)
@@ -71,8 +73,25 @@ void Ghost::applyCollisions(const std::vector<Tile *> &tiles, const Position old
 
 void Ghost::draw(sf::RenderWindow &win)
 {
+	if(!active) return;
+
 	sf::Sprite sprite;
 	sprite.setTexture(tex);
 	sprite.setPosition(sf::Vector2f(pos.getX(), pos.getY()));
 	win.draw(sprite);
+}
+
+void Ghost::collide(Player &player)
+{
+	float pX = player.getPosition().getX();
+	float pY = player.getPosition().getY();
+
+	float tX = pos.getX();
+	float tY = pos.getY();
+
+	if (active && pX + 64 > tX && pX < tX + 64 && pY + 64 - 5 > tY && pY + 5 < tY + 64)
+	{
+		player.addScore(-2);
+		active = false;
+	}
 }

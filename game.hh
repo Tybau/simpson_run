@@ -8,7 +8,7 @@
 #include "ghost.hh"
 #include "state.hh"
 
-#define MAX_TIME 15
+#define MAX_TIME 10
 
 class Game
 {
