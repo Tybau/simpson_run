@@ -13,11 +13,6 @@ Game::Game()
 {
 	setMap();
 
-	/*ghosts.push_back(Ghost(Position(1 * TILE_SIZE, 1 * TILE_SIZE), 0));
-	ghosts.push_back(Ghost(Position(3 * TILE_SIZE, 3 * TILE_SIZE), 1));
-	ghosts.push_back(Ghost(Position(5 * TILE_SIZE, 4 * TILE_SIZE), 2));
-	ghosts.push_back(Ghost(Position(8 * TILE_SIZE, 8 * TILE_SIZE), 3));*/
-
 	screen = 0;
 }
 
@@ -43,10 +38,12 @@ void Game::setMap()
 			int p = 20;
 			map[i][j] = 0;
 
-			if(j > 0 && map[i][j - 1] == 1) p -= 15;
-			if(i > 0 && map[i - 1][j] == 1) p += 30;
-			if(i > 0 && j > 0 && map[i - 1][j - 1] == 1) p += 15;
-			if(i > 0 && j < 13 && map[i - 1][j + 1] == 1) p += 15;
+			if(j > 0 && map[i][j - 1] == 1) p = -15; // pas 2 murs l'un sur l'autre
+			if(i > 0 && map[i - 1][j] == 1) p += 35;
+			if(i > 0 && j > 0 && map[i - 1][j - 1] == 1) p += 5;
+			if(i > 0 && j < 13 && map[i - 1][j + 1] == 1) p += 5;
+
+			if(i == 0 && j == 1) p = 100;
 
 			if(std::rand() % 100 < p)
 			{
@@ -56,7 +53,7 @@ void Game::setMap()
 		}
 	}
 
-	// Genere les bonus
+	// Genere les bonus et fantomes
 	for (int i = 0; i < 13; i++)
 	{
 		for (int j = 0; j < 8; j++)

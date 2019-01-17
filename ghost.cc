@@ -89,7 +89,7 @@ void Ghost::collide(Player &player)
 	float tX = pos.getX();
 	float tY = pos.getY();
 
-	if (active && pX + 64 > tX && pX < tX + 64 && pY + 64 - 5 > tY && pY + 5 < tY + 64)
+	if (active && pX + 50 > tX && pX < tX + 50 && pY + 50 > tY && pY < tY + 50)
 	{
 		player.addScore(-2);
 		active = false;
