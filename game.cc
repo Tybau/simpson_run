@@ -29,7 +29,7 @@ void Game::setMap()
 	std::srand(std::time(nullptr));
 
 	// Genere les murs
-	for (int i = -1; i < 13; i++)
+	for (int i = 0; i < 13; i++)
 	{
 		for (int j = 0; j < 8; j++)
 		{
@@ -41,7 +41,7 @@ void Game::setMap()
 			if(j > 0 && map[i][j - 1] == 1) p = -15; // pas 2 murs l'un sur l'autre
 			if(i > 0 && map[i - 1][j] == 1) p += 35;
 			if(i > 0 && j > 0 && map[i - 1][j - 1] == 1) p += 5;
-			if(i > 0 && j < 13 && map[i - 1][j + 1] == 1) p += 5;
+			if(i > 0 && j < 12 && map[i - 1][j + 1] == 1) p += 5;
 
 			if(i == 0 && j == 1) p = 100;
 
@@ -62,7 +62,7 @@ void Game::setMap()
 
 			if(!map[i][j])
 			{
-				if(i < 13 && map[i][j + 1] == 1) p += 15;
+				if(j < 7 && map[i][j + 1] == 1) p += 15;
 				if(std::rand() % 100 < p)
 					tiles.push_back(new Donut(Position(i * TILE_SIZE, j * TILE_SIZE)));
 				else if(std::rand() % 100 < p / 2)
