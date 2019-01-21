@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <list>
 
 #include "tile.hh"
 #include "player.hh"
@@ -17,7 +18,7 @@ class Game
 private:
 	std::vector<Tile *> tiles;
 	Player player;
-	std::vector<Ghost> ghosts;
+	std::list<Ghost> ghosts;
 
 	int screen;
 	sf::Clock timer;
