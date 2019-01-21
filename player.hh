@@ -13,8 +13,8 @@ public:
 	virtual void draw(sf::RenderWindow &win);
 
 	int getScore() const { return score; };
-	void addScore(const int &s) { score += s; };
 	void resetScore() { score = 0; };
+	void addScore(const int &s);
 private:
 	virtual void applyCollisions(const std::vector<Tile *> &tiles, const Position oldPos);
 };

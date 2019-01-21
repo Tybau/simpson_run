@@ -8,6 +8,8 @@
 #include "ghost.hh"
 #include "state.hh"
 
+#define DISPLAY_WIDTH 832
+#define DESPLAY_HEIGHT 600
 #define MAX_TIME 25
 
 class Game

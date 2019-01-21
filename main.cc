@@ -4,9 +4,6 @@
 #include "game.hh"
 #include "state.hh"
 
-#define DISPLAY_WIDTH 832
-#define DESPLAY_HEIGHT 600
-
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(DISPLAY_WIDTH, DESPLAY_HEIGHT), "Simpson run");

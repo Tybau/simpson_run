@@ -80,3 +80,10 @@ void Player::draw(sf::RenderWindow &win)
 	sprite.setPosition(sf::Vector2f(pos.getX(), pos.getY()));
 	win.draw(sprite);
 }
+
+void Player::addScore(const int &s)
+{
+	score += s;
+	if(score < 0)
+		score = 0;
+}

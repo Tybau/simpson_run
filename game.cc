@@ -87,6 +87,10 @@ void Game::update(State &state)
 			g.update(state, tiles);
 			g.collide(player);
 		}
+
+		// Gerer la chute de l'ecran
+		if(player.getPosition().getY() > DESPLAY_HEIGHT)
+			screen = 1; // Fin du jeu
 	}
 	if(screen == 1)
 	{
