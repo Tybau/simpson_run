@@ -5,7 +5,7 @@
 #include "wall.hh"
 #include "object.hh"
 
-#define SCREEN_WIDTH 800
+#define SCREEN_WIDTH 832
 #define SCREEN_HEIGHT 600
 
 #define DROITE 0
