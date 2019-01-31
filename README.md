@@ -36,7 +36,7 @@ Pour gagner ce jeu, le joueur doit manger tous les donuts présents dans le jeu,
 - Les CasperSimp (fantomes) : -2 points
 - Gravité : En  tombant en dessous de l'écran (les sorties de l'écran sur les côté sont autorisées), la partie est terminée
 
-DE plus pour pimenter le jeu vous devrez réaliser le tout en 25 s.
+De plus pour pimenter le jeu vous devrez réaliser le tout en 25 s.
 
 > Homer ne peut pas avoir un nombre de points inferieur à 0
 
